@@ -102,12 +102,12 @@
 </script>
 <style scoped>
     .left-nav{
-        width: 18%;
+        width: 95%;
         margin-right: 5%;
     }
     .left-nav-block{
         margin-bottom: 20px;
-        border:solid 1px #CDCDCD;
+        border:solid 1px #ccc;
     }
     .left-nav-block>h2{
         border:solid 1px #162556;
@@ -141,10 +141,10 @@
     }
     .hr{
         margin: 0 15px;
-        border-bottom:solid 1px #CDCDCD;
+        border-bottom:solid 1px #ccc;
     }
     .latest-news{
-        min-height: 250px;
+        min-height: 350px;
     }
     .latest-news>ul{
         margin-top: 10px;
@@ -156,7 +156,8 @@
     }
     .latest-news>ul>li>a{
         display: inline-block;
-        background: rgba(22, 181, 247, 0.39);
+        color: #f5f5f5;
+        background: #F38D12;
         padding: 4px 15px;
         border-radius: 20px;
         margin: 0 4px;
