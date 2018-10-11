@@ -1,0 +1,100 @@
+<template>
+    <div class="dialog-wrap" id="dialog-wrap" v-if="isShow">
+        <div class="dialog-cover" @click="closet"></div>
+        <div class="dialog-content">
+            <div class="dialog-header"><slot name="dialog-header">提示</slot></div>
+            <p class="dialog-close" @click="closet">x</p>
+            <slot name="dialog-content">empty</slot>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        props:{
+            isShow:{
+                type:Boolean,
+                default:false
+            }
+        },
+        data (){
+            return {
+
+            }
+        },
+        methods:{
+            closet(){
+                this.$emit("closeDialog")
+            }
+        },
+    }
+</script>
+
+<style scoped>
+    .drop-enter-active {
+        transition: all .5s ease;
+    }
+    .drop-leave-active {
+        transition: all .3s ease;
+    }
+    .drop-enter {
+        transform: translateY(-500px);
+    }
+    .drop-leave-active {
+        transform: translateY(-500px);
+    }
+    .dialog-wrap {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+    .dialog-cover {
+        background: #000;
+        opacity: .3;
+        position: fixed;
+        z-index: 5;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .dialog-header{
+        position: absolute;
+        left: 2%;
+        top: 15px;
+        font-weight: bold;
+        width: 80%;
+        height: 20px;
+        line-height: 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .dialog-content {
+        width: 50%;
+        position: fixed;
+        max-height: 50%;
+        overflow: auto;
+        background: #fff;
+        top: 20%;
+        left: 50%;
+        margin-left: -25%;
+        z-index: 10;
+        border: 2px solid #464068;
+        padding: 3% 2% 2%;
+        line-height: 1.6;
+    }
+    .dialog-close {
+        position: absolute;
+        right: 5px;
+        top: 15px;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        cursor: pointer;
+    }
+    .dialog-close:hover {
+        color: #4fc08d;
+    }
+</style>

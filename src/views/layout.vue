@@ -9,14 +9,16 @@
                         <li class="nav-pipe">|</li>
                         <li><a href="">注册</a></li>
                         <li class="nav-pipe">|</li>
-                        <li><a href="">关于</a></li>
+                        <li><a>关于</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="app-content">
             <keep-alive>
-                <router-view></router-view>
+                <router-view>
+                    demo
+                </router-view>
             </keep-alive>
         </div>
         <div class="app-footer">
@@ -27,10 +29,8 @@
 <script>
     export default{
         data (){
-            return {}
-        },
-        components:{
-
+            return {
+            }
         },
         methods:{
 

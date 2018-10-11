@@ -1,0 +1,36 @@
+{
+  "goods": {
+    "status": "0",
+    "msg": "",
+    "result": [
+      {
+        "productId": "100001",
+        "productName": "音响",
+        "productPrice": "199",
+        "productImg": "1.jpg"
+      },
+      {
+        "productId": "100002",
+        "productName": "电脑",
+        "productPrice": "1222",
+        "productImg": "2.jpg"
+      },
+      {
+        "productId": "100003",
+        "productName": "鼠标",
+        "productPrice": "399",
+        "productImg": "3.jpg"
+      },
+      {
+        "productId": "100004",
+        "productName": "键盘",
+        "productPrice": "499",
+        "productImg": "4.jpg"
+      }
+    ]
+  },
+  "seller":{
+    "status": "0",
+    "msg": ""
+  }
+}

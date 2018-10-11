@@ -58,13 +58,13 @@
         border: solid 1px #ccc;
     }
     .board-list-img{
-        width: 80px;
+        width: 25%;
         height: 80px;
         display: inline-block;
         vertical-align: top;
     }
     .board-list-discribe{
-        width: 78%;
+        width: 68%;
         display: inline-block;
         margin-left: 5%;
     }

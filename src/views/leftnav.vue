@@ -144,7 +144,7 @@
         border-bottom:solid 1px #ccc;
     }
     .latest-news{
-        min-height: 350px;
+        min-height: 310px;
     }
     .latest-news>ul{
         margin-top: 10px;
