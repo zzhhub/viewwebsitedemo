@@ -5,9 +5,14 @@
     <title></title>
 </head>
 <body>
-<div id="cip"></div>
-<div onclick="goto(http://www.baidu.com);">点我啊</div>
+<h1>成功</h1>
 <div onclick="goto2('http://www.baidu.com');">点我啊</div>
+<div id="cip"></div>
+<h1>失败</h1>
+<div onclick="goto(http://www.baidu.com);">点我啊</div>
+
+<a href="./优品馆需求文档.docx">优品馆需求文档</a>
+<a href="src/优品馆需求文档2.docx">优品馆需求文档2</a>
 <script>
     var a = {
         utl:'http://www.baidu.com'
@@ -18,9 +23,8 @@
     function goto2(obj){
         window.open(obj);
     }
-//        document.getElementById("cip").innerHTML ='<div onclick="goto(\''+a.utl+'\');">点我啊</div>';
-    document.getElementById("cip").innerHTML ="<div onclick=\"goto(\'"+a.utl+"\');\">点我啊</div>";
-// imgs+="< img  src='"+litimgs[i].imgurl+"'  style='cursor:pointer;'  onclick=\"goway(\'"+urls+"\');\" />";
+    document.getElementById("cip").innerHTML ='<div onclick="goto(\''+a.utl+'\');">点我啊</div>';
+//    document.getElementById("cip").innerHTML ="<div onclick=\"goto(\'"+a.utl+"\');\">点我啊</div>";
 </script>
 </body>
 </html>
