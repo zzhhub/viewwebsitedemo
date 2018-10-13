@@ -1,7 +1,7 @@
 {
   "goods": {
     "status": "0",
-    "msg": "",
+    "msg": "范德萨发生",
     "result": [
       {
         "productId": "100001",
@@ -32,5 +32,13 @@
   "seller":{
     "status": "0",
     "msg": ""
-  }
+  },
+  "login":{
+    "status": "0",
+    "userName": "zzh",
+    "password":"123456"
+  },
+  "cfmreg":{
+      "code":"1234"
+}
 }

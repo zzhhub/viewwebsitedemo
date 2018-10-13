@@ -6,9 +6,11 @@
                 <div class="head-nav">
                     <ul class="nav-list">
                         <!--<li><router-link to="/" tag="span" @click="showLoginDialog">登录</router-link></li>-->
-                        <li><a @click="showLoginDialog">登录</a></li>
+                        <li><a v-if="userName!==''">{{userName}}</a></li>
+                        <li><a v-if="userName===''" @click="showLoginDialog">登录</a></li>
                         <li class="nav-pipe">|</li>
-                        <li><a @click="showRegisterDialog">注册</a></li>
+                        <li><a v-if="userName!==''" @click="quit">退出</a></li>
+                        <li><a v-if="userName===''" @click="showRegisterDialog">注册</a></li>
                         <li class="nav-pipe">|</li>
                         <li><a @click="showAboutDialog">关于</a></li>
                     </ul>
@@ -34,20 +36,23 @@
             <div slot="dialog-content">
                 <div class="dialog-items">
                     <span>手机号:</span>
-                    <input type="text" placeholder="手机号"/>
+                    <input v-model="regPhoneInput" id="regPhoneInput" type="text" placeholder="手机号"/>
+                    <a class="error-msg">{{regPhonemsg.errortext}}</a>
                 </div>
                 <div class="dialog-items">
                     <span>密码:</span>
-                    <input type="password" placeholder="密码"/>
+                    <input v-model="regPsdInput" id="regPsdInput" type="password" placeholder="密码"/>
+                    <a class="error-msg">{{regPsdmsg.errortext}}</a>
                 </div>
                 <div class="dialog-items">
                     <span>验证码:</span>
-                    <input type="text" placeholder="验证码"/>
-                    <img src="" alt="验证码">
+                    <input v-model="regPsdCfmInput" id="regPsdCfmInput" type="text" placeholder="验证码"/>
+                    <img v-if="!cfmcode" src="" alt="cfmcode">
+                    <a class="error-msg">{{regPsdCfmsg.errortext}}</a>
                 </div>
                 <div class="dialog-items">
                     <span></span>
-                    <input type="submit" value="注册"/>
+                    <input type="submit" value="注册" @click="reg"/>
                 </div>
             </div>
         </dialogs>
@@ -57,15 +62,17 @@
             <div slot="dialog-content">
                 <div class="dialog-items">
                     <span>手机号:</span>
-                    <input type="text" placeholder="手机号"/>
+                    <input v-model="logUserPhone" id="logUserPhoneInput" type="text" placeholder="手机号"/>
+                    <a class="error-msg">{{logphonemsg.errortext}}</a>
                 </div>
                 <div class="dialog-items">
                     <span>密码:</span>
-                    <input type="password" placeholder="密码"/>
+                    <input v-model="logPassword" id="logUserPsdInput" type="password" placeholder="密码"/>
+                    <a class="error-msg">{{logpsdmsg.errortext}}</a>
                 </div>
                 <div class="dialog-items">
                     <span></span>
-                    <input type="submit" value="登录"/>
+                    <input @click="login" type="submit" value="登录"/>
                 </div>
             </div>
         </dialogs>
@@ -73,16 +80,125 @@
 </template>
 <script>
     import dialogs from "./views/dialog.vue"
+    const phoneReg = /^1[34578]\d{9}$/
+    const psdReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}$/
     export default{
         data (){
             return {
+                userName:'',
                 showAbout:false,
                 showRegister:false,
-                showLogin:false
+                showLogin:false,
+                userPhoneFlag:false,
+                userPsdFlag:false,
+                logUserPhone:'',
+                logPassword:'',
+                errortext:'',
+                cfmcode:'',
+                regPhoneInput:'',
+                regPsdInput:'',
+                regPsdCfmInput:'',
             }
         },
         components:{
             dialogs
+        },
+        computed:{
+            logphonemsg(){
+                let errortext,status
+                if(!(phoneReg.test(this.logUserPhone))){
+                    status = false
+                    errortext='手机格式不对'
+                }
+                else{
+                    status = true
+                    errortext=''
+                }
+                if(!this.userPhoneFlag){
+                    errortext=''
+                    this.userPhoneFlag = true
+                }
+                return{
+                    status,
+                    errortext
+                }
+            },
+            logpsdmsg(){
+                let errortext,status
+                if(!(psdReg.test(this.logPassword))){
+                    status = false
+                    errortext='密码必须是6位数(包含)以上数字与字母的组合'
+                }
+                else{
+                    status = true
+                    errortext=''
+                }
+                if(!this.userPsdFlag){
+                    errortext=''
+                    this.userPsdFlag = true
+                }
+                return{
+                    status,
+                    errortext
+                }
+            },
+            regPhonemsg(){
+                let errortext,status
+                if(!(phoneReg.test(this.regPhoneInput))){
+                    status = false
+                    errortext='手机格式不对'
+                }
+                else{
+                    status = true
+                    errortext=''
+                }
+                if(!this.regPhoneFlag){
+                    errortext=''
+                    this.regPhoneFlag = true
+                }
+                return{
+                    status,
+                    errortext
+                }
+            },
+            regPsdmsg(){
+                let errortext,status
+                if(!(psdReg.test(this.regPsdInput))){
+                    status = false
+                    errortext='密码必须是6位数(包含)以上数字与字母的组合'
+                }
+                else{
+                    status = true
+                    errortext=''
+                }
+                if(!this.regPsdFlag){
+                    errortext=''
+                    this.regPsdFlag = true
+                }
+                return{
+                    status,
+                    errortext
+                }
+            },
+            regPsdCfmsg(){
+                let errortext,status
+                if(this.cfmcode!==this.regPsdCfmInput){
+                    status = false
+                    errortext='验证码不正确'
+                }
+                else{
+                    status = true
+                    errortext=''
+                }
+                if(!this.regPsdCfmFlag){
+                    errortext=''
+                    this.regPsdCfmFlag = true
+                }
+                return{
+                    status,
+                    errortext
+                }
+            }
         },
         methods:{
             showAboutDialog(){
@@ -96,7 +212,77 @@
             },
             closeDialog(value){
                 this[value] = false
+            },
+            login(){
+                if(!this.logphonemsg.status || !this.logpsdmsg.status){
+                    if(this.logUserPhone===''){
+                        alert( '手机号码未填写');
+                        $("#logUserPhoneInput").focus();
+                    }else if(this.logPassword===''){
+                        alert('密码未填写');
+                        $("#logUserPsdInput").focus();
+                    }
+                }
+                else{
+                    this.$http.get("/api/login").then((res) => {
+                        let datas = res.data.data;
+                        this.userName = datas.userName;
+//                        隐藏弹出层
+                        this.showLogin = false;
+                        this.closeDialog('showLogin');
+//                        重置内容
+                        this.logUserPhone = '';
+                        this.logPassword = '';
+                        this.errortext = '';
+                        this.userPsdFlag = false;
+                        this.userPhoneFlag = false
+                    },(err)=>{
+                        console.log(err)
+                    })
+                }
+            },
+            quit(){
+                this.userName = ''
+            },
+            reg(){
+                if(!this.regPhonemsg.status || !this.regPsdmsg.status || !this.regPsdCfmsg.status){
+                    if(this.regPhoneInput===''){
+                        alert( '手机号码未填写');
+                        $("#regPhoneInput").focus();
+                    }else if(this.regPsdInput===''){
+                        alert('密码未填写');
+                        $("#regPsdInput").focus();
+                    }else if(this.regPsdCfmInput===''){
+                        alert('验证码未填写');
+                        $("#regPsdCfmInput").focus();
+                    }
+                }
+                else {
+                    alert("注册成功");
+                    this.showRegister = false;
+                    this.closeDialog('showRegister');
+                    this.regPsdCfmFlag = false;
+                    this.regPsdFlag = false;
+                    this.regPhoneFlag = false;
+                    this.regPsdCfmInput = '';
+                    this.regPsdInput = '';
+                    this.regPhoneInput = '';
+//                this.https.post('/api/reg').then((res)=>{
+//
+//                },(err)=>{
+//                    console.log(err)
+//                })
+                }
             }
+        },
+        mounted(){
+            this.$http.get("/api/cfmreg").then((res)=>{
+                let datas = res.data.data
+                this.cfmcode = datas.code
+                console.log(this.cfmcode)
+        },(err)=>{
+            console.log(err)
+        })
         }
     }
 </script>
@@ -168,5 +354,12 @@
         border-radius: 3px;
         cursor: pointer;
         border: none;
+    }
+    .msg-tips{
+        color: #999;
+    }
+    .error-msg{
+        color: #ff3533;
+        margin-left: 4px;
     }
 </style>

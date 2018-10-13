@@ -12,6 +12,8 @@ const app = express();
 const appData = require('./db.json');
 const seller = appData.seller;
 const goods = appData.goods;
+const login = appData.login;
+const cfmreg = appData.cfmreg;
 const apiRoutes = express.Router();
 app.use('/api', apiRoutes);
 
@@ -84,6 +86,20 @@ module.exports = merge(webpackBaseConfig, {
                     data: seller
                 })
             //接口返回json数据，上面配置的数据seller就赋值给data请求后调用
+            }),
+            app.get('/api/login', (req, res) => {
+                res.json({
+                    errno: 0,
+                    data: login
+                })
+                //接口返回json数据，上面配置的数据seller就赋值给data请求后调用
+            }),
+            app.get('/api/cfmreg', (req, res) => {
+                res.json({
+                    errno: 0,
+                    data: cfmreg
+                })
+                //接口返回json数据，上面配置的数据seller就赋值给data请求后调用
             }),
             app.post('/api/goods', function (req, res) {
                 res.json({
