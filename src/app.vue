@@ -2,7 +2,9 @@
     <div id="#app">
         <div class="app-header">
             <div class="app-header-inner">
-                <img src="./images/logo.png" width="60" alt=""/>
+                <router-link :to="{path:'/'}">
+                    <img src="./images/logo.png" width="60" alt=""/>
+                </router-link>
                 <div class="head-nav">
                     <ul class="nav-list">
                         <!--<li><router-link to="/" tag="span" @click="showLoginDialog">登录</router-link></li>-->

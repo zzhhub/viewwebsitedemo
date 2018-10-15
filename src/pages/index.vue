@@ -14,9 +14,9 @@
     </div>
 </template>
 <script>
-    import leftnav from "./leftnav.vue"
-    import boardList from "./boardList.vue"
-    import slideShow from "./slideShow.vue"
+    import leftnav from "./../views/leftnav.vue"
+    import boardList from "./../views/boardList.vue"
+    import slideShow from "./../views/slideShow.vue"
     export default {
         components:{
             leftnav,
@@ -65,9 +65,6 @@
     }
 </script>
 <style scoped>
-    body{
-        background-color: #f5f5f5;
-    }
     .index{
         width: 80%;
         margin: 20px auto;
