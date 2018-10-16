@@ -295,7 +295,7 @@
     }
     .app-header{
         background: #162556;
-        height: 60px;
+        padding: 10px 0;
     }
     .head-nav{
         margin-top: 20px;

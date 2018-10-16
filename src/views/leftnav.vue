@@ -110,14 +110,14 @@
         border:solid 1px #ccc;
     }
     .left-nav-block>h2{
-        border:solid 1px #162556;
+        border:solid 1px #419ff7;
         padding:0 10px;
-        background: #162556;
+        background: #419ff7;
         color: #fff;
         font-size: 14px;
         font-weight: bold;
-        height: 32px;
-        line-height: 32px;
+        height: 36px;
+        line-height: 36px;
     }
     .left-nav-block>h3{
         padding:0 15px;

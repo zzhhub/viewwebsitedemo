@@ -4,8 +4,7 @@
             <div class="product-board">
                 <img :src="productIcon">
                 <ul>
-                    <router-link v-for="(item,index) in products" tag="li" :key="index" active-class="active"
-                                 :to="{ path: item.path }">
+                    <router-link v-for="(item,index) in products" tag="li" :key="index" active-class="active" :to="{ path: item.path }">
                         {{ item.name }}
                     </router-link>
                 </ul>
@@ -24,23 +23,23 @@
         return {
             products: [
                 {
-                    name: '数据统计',
+                    name: '普罗旺斯',
                     path: 'product0',
                     icon: require('../images/product0.jpg'),
                     active: true
                 },
                 {
-                    name: '数据预测',
+                    name: '萤火虫主题公园',
                     path: 'product1',
                     active: false
                 },
                 {
-                    name: '流量分析',
+                    name: '牟尼沟',
                     path: 'product2',
                     active: false
                 },
                 {
-                    name: '广告发布',
+                    name: '亚龙湾海底世界',
                     path: 'product3',
                     active: false
                 }
@@ -48,8 +47,8 @@
             imgMap: {
                 '/details/product0': require("../images/product0.jpg"),
                 '/details/product1': require("../images/product1.jpg"),
-                '/details/product2': require("../images/822.jpg"),
-                '/details/product3': require("../images/823.jpg")
+                '/details/product2': require("../images/product2.jpg"),
+                '/details/product3': require("../images/product3.jpg")
             }
         }
     },
@@ -90,7 +89,7 @@
     .product-board>img{
         max-width: 40%;
         max-height: 40%;
-        margin: 20px auto;
+        margin: 0 auto 20px auto;
         display: block;
     }
     .product-board {
@@ -107,7 +106,7 @@
     }
     .product-board li.active,
     .product-board li:hover {
-        background: #162556;
+        background: #419ff7;
         color: #fff;
     }
     .product-board li a {
@@ -169,7 +168,7 @@
         margin-top: 20px;
     }
     .sales-board-table th {
-        background: #162556;
+        background: #419ff7;
         color: #fff;
     }
     .sales-board-table td {

@@ -31,22 +31,22 @@
                     {
                         src: require('../images/820.jpg'),
                         title: 'xxx1',
-                        href: 'detail/analysis'
+                        href: 'details/product0'
                     },
                     {
                         src: require('../images/821.jpg'),
                         title: 'xxx2',
-                        href: 'detail/count'
+                        href: 'details/product1'
                     },
                     {
                         src: require('../images/822.jpg'),
                         title: 'xxx3',
-                        href: 'http://xxx.xxx.com'
+                        href: 'details/product2'
                     },
                     {
                         src: require('../images/823.jpg'),
                         title: 'xxx4',
-                        href: 'detail/forecast'
+                        href: 'details/product3'
                     }
                 ],
             }
