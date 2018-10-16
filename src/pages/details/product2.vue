@@ -6,9 +6,9 @@
 <script>
     import detailsCon from '../../views/detailsCon.vue'
     export default{
-        components:{
+        components:[
             detailsCon
-        },
+        ],
         data (){
             return {
                 context: {
