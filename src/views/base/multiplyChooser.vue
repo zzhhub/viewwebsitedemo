@@ -31,16 +31,18 @@ export default {
   },
   methods: {
     toggleSelection (index) {
+//      unchoosed to add
       if (this.nowIndexes.indexOf(index) === -1) {
         this.nowIndexes.push(index)  
       }
+//      choosed to remove
       else {
         this.nowIndexes = _.remove(this.nowIndexes, (idx) => {
-          return idx !== index
+            return idx !== index
         })
       }
       let nowObjArray = _.map(this.nowIndexes, (idx) => {
-        return this.selections[idx]
+            return this.selections[idx]
       })
       this.$emit('on-change', nowObjArray)
     },

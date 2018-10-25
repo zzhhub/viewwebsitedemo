@@ -8,7 +8,7 @@
                     <tr class="content-tr">
                         <th class="content-sidetxt">购买数量:</th>
                         <td class="content-sidecon">
-                            <v-counter @on-change="onParamChange('buyNum', $event)"></v-counter>
+                            <v-counter :max="20" @on-change="onParamChange('buyNum', $event)"></v-counter>
                         </td>
                     </tr>
                     <tr class="content-tr">
@@ -31,7 +31,7 @@
                     </tr>
                     <tr class="content-tr">
                         <th class="content-sidetxt">总价:</th>
-                        <td class="content-sidecon">0</td>
+                        <td class="content-sidecon">{{priceSum}}</td>
                     </tr>
                     <tr class="content-tr">
                         <th class="content-sidetxt"></th>
@@ -50,6 +50,7 @@
     import vCounter from '../../views/base/counter.vue'
     import vSelection from '../../views/base/selection.vue'
     import vMulChooser from '../../views/base/multiplyChooser.vue'
+    import _ from 'lodash'
     export default{
         components:{
             detailsCon,vChooser,vCounter,vSelection,vMulChooser
@@ -57,6 +58,9 @@
         data (){
             return {
                 buyNum:0,
+                buyType:{},
+                period:{},
+                versions:[],
                 context:{
                     title:'紫色之都',
                     imgurl:[
@@ -117,12 +121,34 @@
                         value: 4
                     }
                 ],
+                priceSum:0
             }
         },
         methods:{
             onParamChange(attr,val){
                 this[attr] = val
+                this.getPrice()
+            },
+            getPrice(){
+                let versionsArray = _.map(this.versions,(obj)=>{return obj.value})
+                let paramsdata = {
+                    buyNum:this.buyNum,
+                    buyType:this.buyType.value,
+                    period:this.period.value,
+                    versions:versionsArray.join(',')
+                }
+                console.log(paramsdata)
+                this.$http.post("/api/getPrice",paramsdata).then((res) => {
+                    this.priceSum = res.data.data.priceSum
+                })
             }
+        },
+        mounted(){
+            this.buyNum=0
+            this.buyType=this.buyTypes[0]
+            this.period=this.periodList[0]
+            this.versions=[this.versionList[0]]
+            this.getPrice()
         }
     }
 </script>

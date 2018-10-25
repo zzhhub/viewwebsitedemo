@@ -40,5 +40,9 @@
   },
   "cfmreg":{
       "code":"1234"
-}
+  },
+  "getPrice":{
+    "msg":"成功",
+    "priceSum":200
+  }
 }

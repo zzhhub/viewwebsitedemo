@@ -1,0 +1,1 @@
+{"version":3,"sources":["config-compiled.js"],"names":[],"mappings":"AAAA,OAAO,GAAP,MAAgB,OAAhB;;AAEA,IAAI,SAAS;AACT,SAAK;AADI,CAAb;AAGA,eAAe,MAAf;;AAEA","file":"config-compiled-compiled.js","sourcesContent":["import Env from './env';\r\n\r\nvar config = {\r\n    env: Env\r\n};\r\nexport default config;\r\n\r\n//# sourceMappingURL=config-compiled.js.map"]}
