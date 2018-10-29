@@ -74,6 +74,20 @@ module.exports = merge(webpackBaseConfig, {
     //���ÿ������
     devServer: {
         before(app) {
+            app.get('/api', (req, res) => {
+                res.json({
+                    errno: 0,
+                    data: appData
+                });
+            //接口返回json数据，上面配置的数据seller就赋值给data请求后调用
+            }),
+            app.post('/api', (req, res) => {
+                res.json({
+                    errno: 0,
+                    data: appData
+                });
+                //接口返回json数据，上面配置的数据seller就赋值给data请求后调用
+            }),
             app.get('/api/goods', (req, res) => {
                 res.json({
                     errno: 0,
