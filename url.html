@@ -3,8 +3,41 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="flexible" content="initial-dpr=2" />
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">-->
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.2/??flexible_css.js,flexible.js"></script>
+    <script>
+        console.log(window.devicePixelRatio);
+        console.log(document.documentElement.clientWidth);
+        console.log(document.documentElement.clientHeight);
+        console.log(window.screen.width)
+        console.log(window.screen.height)
+//        setTimeout("alert('终于等到你了！')", 3000 )
+//        setInterval("alert('终于等到你了！')", 3000 )
+//        <!--(function (doc, win) {-->
+//            <!--var docEl = doc.documentElement,-->
+                    <!--resizeEvt = 'onorientationchange' in window ? 'onorientationchange' : 'resize',-->
+                    <!--recalc = function () {-->
+                        <!--var clientWidth = docEl.clientWidth;-->
+                        <!--if (!clientWidth) return;-->
+                        <!--if(clientWidth>=750){-->
+                            <!--docEl.style.fontSize = '100px';-->
+                        <!--}else{-->
+                            <!--docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';-->
+                        <!--}-->
+                    <!--};-->
+
+            <!--if (!doc.addEventListener) return;-->
+            <!--win.addEventListener(resizeEvt, recalc, false);-->
+            <!--doc.addEventListener('DOMContentLoaded', recalc, false);-->
+        <!--})(document, window);-->
+    </script>
 </head>
 <body>
+<h1> setTimeout()使用 </h1>
+<p> 请等待三秒!</p>
 <h1>成功</h1>
 <div onclick="goto2('http://www.baidu.com');">点我啊</div>
 <div id="cip"></div>
