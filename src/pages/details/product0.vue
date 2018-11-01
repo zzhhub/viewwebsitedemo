@@ -8,7 +8,7 @@
                     <tr class="content-tr">
                         <th class="content-sidetxt">购买数量:</th>
                         <td class="content-sidecon">
-                            <v-counter :max="20" @on-change="onParamChange('buyNum', $event)"></v-counter>
+                            <v-counter :max="20" :min="0" @on-change="onParamChange('buyNum', $event)"></v-counter>
                         </td>
                     </tr>
                     <tr class="content-tr">
@@ -31,7 +31,7 @@
                     </tr>
                     <tr class="content-tr">
                         <th class="content-sidetxt">总价:</th>
-                        <td class="content-sidecon">{{priceSum}}</td>
+                        <td class="content-sidecon">{{priceSum * buyNum}}</td>
                     </tr>
                     <tr class="content-tr">
                         <th class="content-sidetxt"></th>

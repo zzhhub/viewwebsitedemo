@@ -101,6 +101,12 @@
     </style>
 </head>
 <body>
+<html>
+
+<body id="myid" class="mystyle">
+<div id="div" style="width: 60%;height: 900px;background: #f0c;overflow-y:scroll; " >
+    <div style="height: 1200px;width: 80%;background: #ff0;" id="sd" class="sd" value="dsadsad">lsdkadjsl</div>
+</div>
     <div class="swiper-container" id="swiper-index">
         <!-- 如果需要内容 -->
         <div class="swiper-wrapper">
@@ -132,10 +138,65 @@
         <div class="swiper-pagination"></div>
     </div>
 </body>
+<script type="text/javascript">
+    var eventHandle = {
+        getEvent: function(event){
+            return event || window.event;
+        },
+        addEvent: function(element, type, handler){
+            if(element.addEventListener){
+                element.addEventListener(type, handler, false);
+            }
+            else if(element.attachEvent){
+                element.attachEvent('on'+type, handler);
+            }else{
+                element['on'+type] = handler;
+            }
+        },
+        getWheelDelta: function(event){
+            return event.wheelDelta ? event.wheelDelta : (-event.detail)*40;
+        }
+    }
+
+    function mouseHandle(event){
+        event = eventHandle.getEvent(event);
+        var delta = eventHandle.getWheelDelta(event);
+        console.log( delta )
+    }
+
+
+    eventHandle.addEvent(document.getElementById('sd'), 'mousewheel', mouseHandle);
+    eventHandle.addEvent(document.getElementById('sd'), 'DOMMouseScroll', mouseHandle);
+
+
+
+
+    //    document.getElementById('div').onmousewheel = function(event) {
+    //        event = event || window.event;
+    //        console.dir(event);
+    //    };
+    //    x=document.getElementsByTagName('body')[0];
+    //    document.write("Body CSS class: " + x.className);
+    //    document.write("<br />");
+    //    document.write("An alternate way: ");
+    //    document.write(document.getElementById('myid').className);
+</script>
 <script src="./swiper/js/jquery-1.10.1.min.js"></script>
 <script src="./swiper/js/swiper-3.4.2.jquery.min.js"></script>
 <script src="./swiper/js/swiper.animate1.0.2.min.js"></script>
 <script>
+    function getElementsByClassName(className,tagName){
+        var ele=[],all=document.getElementsByTagName(tagName||"*");
+        for(var i=0;i<all.length;i++){
+            if(all[i].className.className.match(new RegExp('(\\s|^)'+cls+'(\\s|$)'))){
+                ele[ele.length]=all[i];
+            }
+        }
+        return ele;
+        alert(ele)
+    }
+    var box = document.getElementsByClassName("sd")[0].innerHTML = "Hello World!";
+
     $("#swiper-index .swiper-button-prev").css("left","-48px");
     $("#swiper-index .swiper-button-next").css("right","-48px");
     var mySwiper = new Swiper('#swiper-index', {
