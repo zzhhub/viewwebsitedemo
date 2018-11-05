@@ -2,7 +2,7 @@
     <div class="selection-component">
       <div class="selection-show" @click="toggleDrop">
         <span>{{ selections[nowIndex].label }}</span>
-        <div class="arrow"></div>
+        <div class="arrow" :class="arrowDir"></div>
       </div>
       <div class="selection-list" v-if="isDrop">
         <ul>
@@ -26,16 +26,24 @@ export default {
   data () {
     return {
       isDrop: false,
-      nowIndex: 0
+      nowIndex: 0,
+      arrowDir:'arrow-down'
     }
   },
   methods: {
     toggleDrop () {
       this.isDrop = !this.isDrop
+      if(this.isDrop===true){
+          this.arrowDir = 'arrow-up'
+      }
+      else{
+        this.arrowDir = 'arrow-down'
+      }
     },
     chooseSelection (index) {
       this.nowIndex = index
       this.isDrop = false
+      this.arrowDir = 'arrow-down'
       this.$emit('on-change', this.selections[this.nowIndex])
     }
   }
@@ -60,15 +68,22 @@ export default {
 }
 .selection-show .arrow {
   display: inline-block;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 5px solid #e3e3e3;
   width: 0;
   height: 0;
   margin-top: -1px;
   margin-left: 6px;
   margin-right: -14px;
   vertical-align: middle;
+}
+.arrow-down{
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid #e3e3e3;
+}
+.arrow-up{
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 5px solid #e3e3e3;
 }
 .selection-list {
   display: inline-block;
