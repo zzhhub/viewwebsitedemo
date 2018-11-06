@@ -36,7 +36,7 @@
                     <tr class="content-tr">
                         <th class="content-sidetxt"></th>
                         <td class="content-sidecon">
-                            <input type="submit" value="立即购买" @click="showShoppingDialog"/>
+                            <input type="submit" class="btn btn-radius btn-primary" value="立即购买"  @click="showShoppingDialog"/>
                         </td>
                     </tr>
                 </table>
@@ -235,5 +235,22 @@
         background: #4fc08d;
         color: #fff;
         border: 1px solid #4fc08d;
+    }
+    .btn{
+        padding:6px 20px;
+        color: #333;
+        cursor: pointer;
+    }
+    .btn-radius{
+        border-radius: 3px;
+    }
+    .btn-primary{
+        background: #4fc08d;
+        color: #fff;
+        border: solid 2px #4fc08d;
+    }
+    .btn-primary:hover{
+        background: #40976e;
+        border: solid 2px #40976e;
     }
 </style>
