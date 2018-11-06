@@ -18,7 +18,7 @@
                         </td>
                     </tr>
                     <tr class="content-tr">
-                        <th class="content-sidetxt">性别:</th>
+                        <th class="content-sidetxt">适用范围:</th>
                         <td class="content-sidecon">
                             <v-chooser :selections="periodList" @on-change="onParamChange('period', $event)"></v-chooser>
                         </td>
@@ -36,12 +36,34 @@
                     <tr class="content-tr">
                         <th class="content-sidetxt"></th>
                         <td class="content-sidecon">
-                            <input type="submit" value="立即购买"/>
+                            <input type="submit" value="立即购买" @click="showShoppingDialog"/>
                         </td>
                     </tr>
                 </table>
             </div>
         </div>
+        <v-dialog :isShow="isShowShoppingDialog" @on-close="closeShoppingDialog">
+            <table class="buy-dialog-table">
+                <tr>
+                    <th>购买数量</th>
+                    <th>购票类型</th>
+                    <th>适用范围</th>
+                    <th>景点选择</th>
+                    <th>总价（元）</th>
+                </tr>
+                <tr>
+                    <td>{{ buyNum }}</td>
+                    <td>{{ buyType.label }}</td>
+                    <td>{{ period.label }}</td>
+                    <td>
+                        <span class="bank-item" v-for="item in versions">{{ item.label }}</span>
+                    </td>
+                    <td><span style="color: #ff9900;">￥{{ priceSum * buyNum }}</span></td>
+                </tr>
+            </table>
+            <h2 class="bank-title">付款银行</h2>
+            <vbankChooser></vbankChooser>
+        </v-dialog>
     </div>
 </template>
 <script>
@@ -50,13 +72,16 @@
     import vCounter from '../../views/base/counter.vue'
     import vSelection from '../../views/base/selection.vue'
     import vMulChooser from '../../views/base/multiplyChooser.vue'
+    import vbankChooser from '../../views/base/bankChooser.vue'
+    import vDialog from '../../views/base/dialog.vue'
     import _ from 'lodash'
     export default{
         components:{
-            detailsCon,vChooser,vCounter,vSelection,vMulChooser
+            detailsCon,vChooser,vCounter,vSelection,vMulChooser,vbankChooser,vDialog
         },
         data (){
             return {
+                isShowShoppingDialog:false,
                 buyNum:0,
                 buyType:{},
                 period:{},
@@ -92,11 +117,11 @@
                 ],
                 periodList: [
                     {
-                        label: '男',
+                        label: '成人',
                         value: 0
                     },
                     {
-                        label: '女',
+                        label: '儿童',
                         value: 1
                     }
                 ],
@@ -141,6 +166,12 @@
                 this.$http.post("/api/getPrice",paramsdata).then((res) => {
                     this.priceSum = res.data.data.priceSum
                 })
+            },
+            showShoppingDialog(){
+                this.isShowShoppingDialog = true;
+            },
+            closeShoppingDialog(){
+                this.isShowShoppingDialog = false;
             }
         },
         mounted(){
@@ -176,5 +207,33 @@
         width: 15%;
         font-size: 14px;
         font-weight: bold;
+    }
+    .bank-title{
+        color: #333;
+        background: #f7f7f7;
+        padding: 0 0 0 15px;
+        font-size: 16px;
+        margin: 5px auto;
+    }
+    .bank-item{
+        margin: 0 4px;
+    }
+    .buy-dialog-btn {
+        margin-top: 20px;
+    }
+    .buy-dialog-table {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .buy-dialog-table td,
+    .buy-dialog-table th{
+        border: 1px solid #e3e3e3;
+        text-align: center;
+        padding: 5px 0;
+    }
+    .buy-dialog-table th {
+        background: #4fc08d;
+        color: #fff;
+        border: 1px solid #4fc08d;
     }
 </style>
