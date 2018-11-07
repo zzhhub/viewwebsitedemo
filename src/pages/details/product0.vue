@@ -43,6 +43,7 @@
             </div>
         </div>
         <v-dialog :isShow="isShowShoppingDialog" @on-close="closeShoppingDialog">
+            <h2 class="bank-title">订单详情</h2>
             <table class="buy-dialog-table">
                 <tr>
                     <th>购买数量</th>
@@ -63,6 +64,10 @@
             </table>
             <h2 class="bank-title">付款银行</h2>
             <vbankChooser></vbankChooser>
+            <div class="btn-group">
+                <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="确认" @click="showShoppingDialog"/>
+                <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="取消" @click="closeShoppingDialog"/>
+            </div>
         </v-dialog>
     </div>
 </template>
@@ -210,10 +215,7 @@
     }
     .bank-title{
         color: #333;
-        background: #f7f7f7;
-        padding: 0 0 0 15px;
-        font-size: 16px;
-        margin: 5px auto;
+        font-weight: bold;
     }
     .bank-item{
         margin: 0 4px;
@@ -243,6 +245,10 @@
     }
     .btn-radius{
         border-radius: 3px;
+    }
+    .btn-group{
+        margin: 10px auto 0 auto;
+        text-align: center;
     }
     .btn-primary{
         background: #4fc08d;

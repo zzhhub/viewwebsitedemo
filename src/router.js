@@ -1,5 +1,6 @@
 import index from './pages/index.vue';
 import details from './pages/details.vue';
+import orderList from './pages/orderList.vue';
 import product0 from './pages/details/product0.vue';
 import product1 from './pages/details/product1.vue';
 import product2 from './pages/details/product2.vue';
@@ -12,6 +13,13 @@ const routers = [
             title: 'index'
         },
         component: index
+    },
+    {
+        path: '/orderList',
+        meta: {
+            title: 'orderList'
+        },
+        component: orderList
     },
     {
         path: '/details',
