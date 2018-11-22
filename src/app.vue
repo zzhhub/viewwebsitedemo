@@ -49,7 +49,7 @@
                 <div class="dialog-items">
                     <span>验证码:</span>
                     <input v-model="regPsdCfmInput" id="regPsdCfmInput" type="text" placeholder="验证码"/>
-                    <img v-if="!cfmcode" src="" alt="cfmcode">
+                    <img src="./images/product0.jpg" width="30" :alt="cfmcode">
                     <a class="error-msg">{{regPsdCfmsg.errortext}}</a>
                 </div>
                 <div class="dialog-items">
@@ -96,7 +96,7 @@
                 logUserPhone:'',
                 logPassword:'',
                 errortext:'',
-                cfmcode:'',
+                cfmcode:1234,
                 regPhoneInput:'',
                 regPsdInput:'',
                 regPsdCfmInput:'',
@@ -184,12 +184,18 @@
             },
             regPsdCfmsg(){
                 let errortext,status
-                if(this.cfmcode!==this.regPsdCfmInput){
-                    status = false
-                    errortext='验证码不正确'
+                if(this.regPsdCfmInput!==''){
+                    if(this.cfmcode!==this.regPsdCfmInput){
+                        status = false
+                        errortext='验证码不正确'
+                    }
+                    else{
+                        status = true
+                        errortext=''
+                    }
                 }
                 else{
-                    status = true
+                    status = false
                     errortext=''
                 }
                 if(!this.regPsdCfmFlag){
@@ -249,7 +255,7 @@
             reg(){
                 if(!this.regPhonemsg.status || !this.regPsdmsg.status || !this.regPsdCfmsg.status){
                     if(this.regPhoneInput===''){
-                        alert( '手机号码未填写');
+                        alert('手机号码未填写');
                         $("#regPhoneInput").focus();
                     }else if(this.regPsdInput===''){
                         alert('密码未填写');
@@ -282,9 +288,9 @@
                 let datas = res.data.data
                 this.cfmcode = datas.code
                 console.log(this.cfmcode)
-        },(err)=>{
-            console.log(err)
-        })
+            },(err)=>{
+                console.log(err)
+            })
         }
     }
 </script>

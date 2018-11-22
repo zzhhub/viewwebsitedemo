@@ -27,6 +27,58 @@
         "productPrice": "499",
         "productImg": "4.jpg"
       }
+    ],
+    "result": [
+      {
+        "productId": "100001",
+        "productName": "音响",
+        "productPrice": "199",
+        "productImg": "1.jpg"
+      },
+      {
+        "productId": "100002",
+        "productName": "电脑",
+        "productPrice": "1222",
+        "productImg": "2.jpg"
+      },
+      {
+        "productId": "100003",
+        "productName": "鼠标",
+        "productPrice": "399",
+        "productImg": "3.jpg"
+      },
+      {
+        "productId": "100004",
+        "productName": "键盘",
+        "productPrice": "499",
+        "productImg": "4.jpg"
+      }
+    ],
+    "productList": [
+      {
+        "productId": "100001",
+        "productName": "音响",
+        "productPrice": "199",
+        "productImg": "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2749167609,1759473760&fm=27&gp=0.jpg"
+      },
+      {
+        "productId": "100002",
+        "productName": "电脑",
+        "productPrice": "1222",
+        "productImg": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2282511595,4064317561&fm=27&gp=0.jpg"
+      },
+      {
+        "productId": "100003",
+        "productName": "鼠标",
+        "productPrice": "399",
+        "productImg": "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2749167609,1759473760&fm=27&gp=0.jpg"
+      },
+      {
+        "productId": "100004",
+        "productName": "键盘",
+        "productPrice": "499",
+        "productImg": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2282511595,4064317561&fm=27&gp=0.jpg"
+      }
     ]
   },
   "seller":{
