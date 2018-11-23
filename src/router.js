@@ -64,7 +64,7 @@ const routers = [
         meta: {
             title: 'index'
         },
-        redirect: '/index'
+        redirect: '/'
     },
 ]
 export default routers;

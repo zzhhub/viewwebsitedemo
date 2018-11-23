@@ -2,41 +2,50 @@
     <div class="orderList-wrap">
         <div class="orderList-inner">
             <span class="orderList-item">选购类型：<v-select :selections="buyTypes" @on-change="changeBuyTypes('buyType',$event)"></v-select></span>
-            <span class="orderList-item">日期筛选：<v-datepicker @on-change="getData" :width="'210px'" :styleObj="{'width':'200px','border':'solid 1px #ccc','height':'25px','border-radius':'2px'}" :readonly="true"></v-datepicker>
-            -<v-datepicker @on-change="getData" :width="'210px'" :styleObj="{'width':'200px','border':'solid 1px #ccc','height':'25px','border-radius':'2px'}" :readonly="true"></v-datepicker></span>
+            <span class="orderList-item">日期筛选：<v-datepicker @on-change="startDate" :width="'210px'" :styleObj="{'width':'200px','border':'solid 1px #ccc','height':'25px','border-radius':'2px'}" :readonly="true"></v-datepicker>
+            -<v-datepicker @on-change="endDate" :width="'210px'" :styleObj="{'width':'200px','border':'solid 1px #ccc','height':'25px','border-radius':'2px'}" :readonly="true"></v-datepicker></span>
             <span class="orderList-item">搜索：<input type="text" class="searchInput" placeholder="请输入..." @keyup.enter="getData" v-model.lazy="query"></span>
         </div>
-        <h2 v-if='isTableshow' class="bank-title">订单详情</h2>
-        <table class="buy-dialog-table" v-if='isTableshow'>
-            <tr>
-                <th>购买数量</th>
-                <th>购票类型</th>
-                <th>景点选择</th>
-                <th>总价（元）</th>
-            </tr>
-            <tr v-for="(proitem,index) in productList">
-                <td style="width: 25%;">{{ proitem.productId }}</td>
-                <td style="width: 25%;">{{ proitem.productName }}</td>
-                <td style="width: 25%;"><img width="200" :src="proitem.productImg" alt=""/></td>
-                <td style="width: 25%;"><span style="color: #ff9900;">￥{{ proitem.productPrice }}</span></td>
-            </tr>
-        </table>
-        <div class="btn-group" v-if='isTableshow'>
-            <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="确认" @click="showSuccDialog('ispayDialog')"/>
+        <div style="width: 1000px;margin: 40px auto 0;">
+            <h2 v-if='isTableshow' class="bank-title">订单详情</h2>
+            <table class="buy-dialog-table" v-if='isTableshow'>
+                <tr>
+                    <th>产品编号</th>
+                    <th>产品名称</th>
+                    <th>产品描述</th>
+                    <th>单价（元）</th>
+                </tr>
+                <tr v-for="(proitem,index) in productList">
+                    <td style="width: 25%;">{{ proitem.productId }}</td>
+                    <td style="width: 25%;">{{ proitem.productName }}</td>
+                    <td style="width: 25%;"><img width="200" height="100" :src="proitem.productImg" alt=""/></td>
+                    <td style="width: 25%;"><span style="color: #ff9900;">￥{{ proitem.productPrice }}</span></td>
+                </tr>
+            </table>
+        </div>
+        <div>{{ count }}</div>
+        <div>
+            <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="+" @click="$store.commit('add',10)"/>
+            <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="-" @click="$store.commit('reduce')"/>
         </div>
     </div>
 </template>
 <script>
+    import store from '../vuex/store.js'
+    import {mapState,mapMutations,mapGetters,mapActions} from 'vuex'
     import vSelection from '../views/base/selection.vue'
     import vDatepicker from '../views/base/datepicker.vue'
     import vDialog from '../views/base/dialog.vue'
     export default{
+        store,
         data (){
             return {
                 isTableshow:false,
                 query:"",
                 ispayDialog:false,
                 buyType:0,
+                startTime:'',
+                endTime:'',
                 productList:[],
                 buyTypes: [
                     {
@@ -74,10 +83,31 @@
                 this.getData()
             }
         },
+        //利用mapState
+        computed:{
+            count(){return this.$store.state.count},
+            ...mapState(['count']),
+            ...mapGetters(['count'])
+        },
         methods:{
-            getData(){
+//            ...mapMutations(["add", "reduce"]),
+//            ...mapActions(["addAction", "reduceAction"]),
+            startDate(obj){
+                this.startTime = obj
+                this.getData()
+            },
+            endDate(obj){
+                this.endTime = obj
+                this.getData()
+            },
+            getData(obj){
                 this.isTableshow = true
-                let paramsdata ={}
+                let paramsdata ={
+                    buyType:this.buyType,
+                    startTime:this.startTime,
+                    endTime:this.endTime,
+                    query:this.query
+                }
                 this.$http.post("/api",paramsdata).then((res) => {
                     this.productList = res.data.data.goods.productList
                 })
@@ -89,6 +119,9 @@
             showSuccDialog(){
 
             }
+        },
+        mounted(){
+            this.getData()
         }
     }
 </script>

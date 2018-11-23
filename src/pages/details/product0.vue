@@ -8,7 +8,7 @@
                     <tr class="content-tr">
                         <th class="content-sidetxt">购买数量:</th>
                         <td class="content-sidecon">
-                            <v-counter :max="20" :min="0" @on-change="onParamChange('buyNum', $event)"></v-counter>
+                            <v-counter :max="20" :min="1" @on-change="onParamChange('buyNum', $event)"></v-counter>
                         </td>
                     </tr>
                     <tr class="content-tr">
@@ -65,8 +65,16 @@
             <h2 class="bank-title">付款银行</h2>
             <vbankChooser></vbankChooser>
             <div class="btn-group">
-                <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="确认" @click="showShoppingDialog"/>
+                <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="确认" @click="orderConfirmDialog"/>
                 <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="取消" @click="closeShoppingDialog"/>
+            </div>
+        </v-dialog>
+        <v-dialog :isShow="isOrderConfirmDialog" @on-close="closeOrderConfirmDialog">
+            您的订单支付状态已变更。<span class="payStatus">{{ payStatus }}</span>
+            <div>
+                您可以：
+                <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="订单详情" @click="gotoOrderList"/>
+                <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="返回首页" @click="gotoIndex"/>
             </div>
         </v-dialog>
     </div>
@@ -86,8 +94,10 @@
         },
         data (){
             return {
+                payStatus:'',
                 isShowShoppingDialog:false,
-                buyNum:0,
+                isOrderConfirmDialog:false,
+                buyNum:1,
                 buyType:{},
                 period:{},
                 versions:[],
@@ -167,7 +177,6 @@
                     period:this.period.value,
                     versions:versionsArray.join(',')
                 }
-                console.log(paramsdata)
                 this.$http.post("/api/getPrice",paramsdata).then((res) => {
                     this.priceSum = res.data.data.priceSum
                 })
@@ -177,10 +186,35 @@
             },
             closeShoppingDialog(){
                 this.isShowShoppingDialog = false;
+            },
+            orderConfirmDialog(){
+                this.isShowShoppingDialog = false;
+                this.isOrderConfirmDialog = true;
+                let versionsArray = _.map(this.versions,(obj)=>{return obj.value})
+                let params = {
+                    buyNum : this.buyNum,
+                    buyType : this.buyType.value,
+                    period : this.period.value,
+                    versions : versionsArray.join(",")
+                }
+                this.$http.post("/api",params).then((res) => {
+                    this.payStatus =  res.data.data.payStatus.msg
+                })
+            },
+            closeOrderConfirmDialog(){
+                this.isOrderConfirmDialog = false;
+            },
+            gotoOrderList(){
+                this.isOrderConfirmDialog = false;
+                this.$router.push({path:"/orderList"})
+            },
+            gotoIndex(){
+                this.isOrderConfirmDialog = false;
+                this.$router.push({path:"/"})
             }
         },
         mounted(){
-            this.buyNum=0
+            this.buyNum=1
             this.buyType=this.buyTypes[0]
             this.period=this.periodList[0]
             this.versions=[this.versionList[0]]
@@ -258,5 +292,11 @@
     .btn-primary:hover{
         background: #40976e;
         border: solid 2px #40976e;
+    }
+    .payStatus{
+        font-weight: bold;
+        font-size: 24px;
+        margin: 0 15px;
+        color: #ff9900;
     }
 </style>

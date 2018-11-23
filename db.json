@@ -96,5 +96,9 @@
   "getPrice":{
     "msg":"成功",
     "priceSum":200
+  },
+  "payStatus":{
+    "msg":"支付成功",
+    "code":1001
   }
 }

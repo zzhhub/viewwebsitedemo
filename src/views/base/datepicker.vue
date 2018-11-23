@@ -115,7 +115,8 @@
             :style="styleObj"
             :readonly="readonly"
             v-model="showValue"
-            @click="show = !show">
+            @click="show = !show"
+            placeholder="请选择日期">
         <div class="picker-wrap" v-show="show">
             <table class="date-picker">
                 <thead>
