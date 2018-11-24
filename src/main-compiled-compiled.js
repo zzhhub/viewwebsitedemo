@@ -7,8 +7,6 @@ import App from './app.vue';
 import axios from 'axios';
 import 'iview/dist/styles/iview.css';
 import '../my-theme/index.less';
-import './styles/common.css';
-import $ from 'jquery';
 
 Vue.use(VueRouter);
 Vue.use(iView);
@@ -41,3 +39,5 @@ var vm = new Vue({
 });
 
 //# sourceMappingURL=main-compiled.js.map
+
+//# sourceMappingURL=main-compiled-compiled.js.map
