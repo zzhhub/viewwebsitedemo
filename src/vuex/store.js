@@ -3,34 +3,34 @@ import vuex from 'vuex'
 vue.use(vuex)
 
 const state = {
-    count:1
+    count:1,
+    name:"nick"
 }
 
 const mutations = {
-    add(state,n){
-        state.count+=n
+    add(state,payload){
+        state.count+=payload
     },
-    reduce(state){
-        state.count--
+    reduce(state,payload){
+        state.count-=payload
+    },
+    avrage(state,payload){
+        state.count/=payload
     }
 }
 
 const getters = {
-    count:()=>{
-        return state.count+=10
+    getcount:(state)=>{
+        return state.name+" has "+state.count +" Apples ";
     }
 }
 
 const actions = {
-    addAction:(context)=>{
-        context.commit("add",10)
-        console.log(state.count)
-        setTimeout(()=>{
-            context.commit("reduce")
-        },3000)
+    addAction:(context,value)=>{
+        context.commit("add",value)
     },
-    reduceAction(commit){
-        commit("reduce")
+    reduceAction(context,value){
+        context.commit("reduce",value)
     }
 }
 

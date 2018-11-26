@@ -24,9 +24,11 @@
             </table>
         </div>
         <div>{{ count }}</div>
+        <div>{{ getcount }}</div>
         <div>
             <!--<input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="+" @click="$store.commit('add',10)"/>-->
-            <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="+" @click="addAction"/>
+            <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="+" @click="add"/>
+            <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="avrage(2)" @click="avrage(2)"/>
             <!--<input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="-" @click="$store.commit('reduce')"/>-->
             <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="-" @click="reduceAction"/>
         </div>
@@ -89,10 +91,10 @@
         computed:{
 //            count(){return this.$store.state.count},
             ...mapState(['count']),
-            ...mapGetters(['count'])
+            ...mapGetters(['getcount'])
         },
         methods:{
-            ...mapMutations(["add", "reduce"]),
+            ...mapMutations(["add",'avrage', "reduce"]),
             ...mapActions(["addAction", "reduceAction"]),
             startDate(obj){
                 this.startTime = obj
@@ -101,6 +103,12 @@
             endDate(obj){
                 this.endTime = obj
                 this.getData()
+            },
+            add(){
+                this.$store.commit('add',10)
+            },
+            reduceAction(){
+                this.$store.dispatch('reduceAction',10)
             },
             getData(obj){
                 this.isTableshow = true
