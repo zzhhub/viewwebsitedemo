@@ -25,8 +25,10 @@
         </div>
         <div>{{ count }}</div>
         <div>
-            <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="+" @click="$store.commit('add',10)"/>
-            <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="-" @click="$store.commit('reduce')"/>
+            <!--<input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="+" @click="$store.commit('add',10)"/>-->
+            <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="+" @click="addAction"/>
+            <!--<input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="-" @click="$store.commit('reduce')"/>-->
+            <input type="submit" class="btn btn-radius btn-primary" style="margin: 0 10px;" value="-" @click="reduceAction"/>
         </div>
     </div>
 </template>
@@ -85,13 +87,13 @@
         },
         //利用mapState
         computed:{
-            count(){return this.$store.state.count},
+//            count(){return this.$store.state.count},
             ...mapState(['count']),
             ...mapGetters(['count'])
         },
         methods:{
-//            ...mapMutations(["add", "reduce"]),
-//            ...mapActions(["addAction", "reduceAction"]),
+            ...mapMutations(["add", "reduce"]),
+            ...mapActions(["addAction", "reduceAction"]),
             startDate(obj){
                 this.startTime = obj
                 this.getData()

@@ -24,6 +24,7 @@ const getters = {
 const actions = {
     addAction:(context)=>{
         context.commit("add",10)
+        console.log(state.count)
         setTimeout(()=>{
             context.commit("reduce")
         },3000)
